@@ -136,27 +136,32 @@
 
 
 
+// Captura os elementos do HTML
+// Captura os elementos do HTML
 const barcodeResults = document.getElementById('barcode-results');
 const codeCount = document.getElementById('count');
 const successSound = document.getElementById('successSound');
 const errorSound = document.getElementById('errorSound');
+const codeInput = document.getElementById('codeInput');
 let detectedBarcodes = [];
 let codeCounter = 0;
 let errorDisplayed = false;
 
+// Inicia a leitura do código de barras
 async function startBarcodeReader() {
     try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
         const video = document.getElementById('video');
         video.srcObject = stream;
         await video.play();
-        setInterval(readBarcode, 1000); // Escaneia a cada 3 segundos
+        setInterval(readBarcode, 1500); // Escaneia a cada 3 segundos
     } catch (error) {
         console.error('Erro ao iniciar a leitura do código de barras:', error);
         displayMessage('Erro ao iniciar a leitura do código de barras.', 'error');
     }
 }
 
+// Função para ler o código de barras
 async function readBarcode() {
     try {
         const barcodeDetector = new BarcodeDetector();
@@ -198,25 +203,23 @@ async function readBarcode() {
     }
 }
 
-function formatBarcode(rawBarcode) {
-    const lastFourDigits = rawBarcode.slice(-4);
-    const formattedBarcode = rawBarcode.replace(lastFourDigits, `<span class="bold">${lastFourDigits}</span>`);
-    return formattedBarcode;
-}
-
+// Função para enviar os códigos lidos
 function sendCodes() {
     const textarea = document.getElementById('codigos');
     textarea.value = detectedBarcodes.join('\n'); // Adiciona os códigos lidos ao textarea do formulário
 }
 
+// Função para reproduzir o som de sucesso
 function playSuccessSound() {
     successSound.play();
 }
 
+// Função para reproduzir o som de erro
 function playErrorSound() {
     errorSound.play();
 }
 
+// Função para exibir uma mensagem na seção de resultados
 function displayMessage(message, type) {
     const messageDiv = document.createElement('div');
     messageDiv.textContent = message;
@@ -225,6 +228,7 @@ function displayMessage(message, type) {
     barcodeResults.scrollTop = barcodeResults.scrollHeight;
 }
 
+// Função para limpar a mensagem de erro
 function clearError() {
     const errorDiv = document.querySelector('.error');
     if (errorDiv) {
@@ -233,16 +237,12 @@ function clearError() {
     }
 }
 
+// Função para recarregar a página
 function reloadPage() {
     window.location.reload();
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    startBarcodeReader();
-});
-
-const codeInput = document.getElementById('codeInput');
-
+// Event listener para adicionar códigos digitados manualmente
 codeInput.addEventListener('keyup', function(event) {
     if (event.key === 'Enter') {
         const inputValue = this.value.trim();
@@ -264,4 +264,9 @@ codeInput.addEventListener('keyup', function(event) {
         }
         this.value = '';
     }
+});
+
+// Inicia o leitor de código de barras ao carregar o documento HTML
+document.addEventListener('DOMContentLoaded', function() {
+    startBarcodeReader();
 });

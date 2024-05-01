@@ -8,31 +8,38 @@
 </head>
 
 <body>
+    <!-- Seção do formulário -->
     <div id="form-overlay">
         <div id="form-container">
-            <form id="form" action="https://script.google.com/macros/s/AKfycbzi57W_KrwzojBl4bG8voF9a58rNwaS3VKbzGmkhz9uJHaaIHbbZ_HXece_t7nWHArq/exec" method="post">
+            <form id="form" action="https://script.google.com/macros/s/AKfycbyRQ6J2eqMNaxQ8bkt8FNwqOHfHMNbFAj4TzPMvwLNvW5nzD7xCG478__-z_wzGW-xP/exec" method="post">
+                <!-- Título do formulário -->
                 <h2>Seus Códigos</h2>
         
-                <label for="acao" class="acao">Ação:</label>
+                <!-- Dropdown para seleção da ação -->
+                <label for="acao" class="acao">Escolha:</label>
                 <select id="acao" name="acao" required>
                     <option value="">Selecione uma opção</option>
                     <option value="Insucesso">Insucesso</option>
                     <option value="Coletas" selected>Coletas</option>
                 </select>
         
+                <!-- Campo para inserir o nome do usuário -->
                 <label for="seunome">Seu Nome:</label>
-                <input type="text" id="seunome" name="seunome" required autocomplete="on">
+                <input type="text" id="seunome" name="seunome" required autocomplete="off">
         
+                <!-- Campo de texto para inserir os códigos lidos -->
                 <label for="codigos">Códigos Lidos:</label>
                 <textarea id="codigos" name="codigos" rows="5" required></textarea>
         
+                <!-- Botão para enviar o formulário -->
                 <button type="submit" class="enviar">Enviar</button>
-                <!-- Botão para voltar para a página de coleta -->
-                <button type="button" onclick="toggleForm()" class="voltar">Voltar para Coleta</button>
+                <!-- Botão de Voltar para Coleta -->
+                <button type="button" onclick="toggleForm(true)" class="voltar">Voltar para Coleta</button>
             </form>
         </div>
     </div>
 
+    <!-- Seção dos resultados de leitura -->
     <p class="alerta">Se não iniciar a leitura, atualize a página!</p>
     <video id="video" playsinline></video>
     <input type="number" name="codigo" id="codeInput" placeholder="Não escaneou, digite aqui"/>
@@ -44,16 +51,21 @@
         <button id="sendCodesButton" class="button" onclick="sendCodes(); toggleForm();">Enviar Códigos</button>
     </div>
 
+    <!-- Elementos de áudio para feedback -->
     <audio id="successSound" src="audio/sucesso.mp3"></audio>
     <audio id="errorSound" src="audio/error-126627.mp3"></audio>
 
+    <!-- Importação da biblioteca QuaggaJS -->
     <script src="https://cdn.jsdelivr.net/npm/quagga/dist/quagga.min.js"></script>
+    <!-- Script JavaScript personalizado -->
     <script src="js/script.js"></script>
     <script>
+        // Função para abrir ou fechar o formulário
         function toggleForm() {
             var overlay = document.getElementById("form-overlay");
             overlay.style.display = overlay.style.display === "none" ? "block" : "none";
-        }
+}
+
 
         // Função para buscar o valor do localStorage e definir no input "seunome"
         document.addEventListener('DOMContentLoaded', function() {
