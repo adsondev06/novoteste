@@ -25,7 +25,7 @@
         
                 <!-- Campo para inserir o nome do usuário -->
                 <label for="seunome">Seu Nome:</label>
-                <input type="text" id="seunome" name="seunome" required autocomplete="off">
+                <input type="text" id="seunome" name="seunome" required autocomplete="off" readonly>
         
                 <!-- Campo de texto para inserir os códigos lidos -->
                 <label for="codigos">Códigos Lidos:</label>
@@ -48,7 +48,11 @@
     <div class="button-container">
         <button id="reloadButton" class="button" onclick="reloadPage()">Atualizar Página</button>
         <!-- Botão de Enviar Códigos -->
-        <button id="sendCodesButton" class="button" onclick="sendCodes(); toggleForm();">Enviar Códigos</button>
+        <button id="sendCodesButton" class="button" onclick="sendCodes(); toggleForm();">
+            <span class="click-twice">Clique 2x</span> 
+            Enviar Códigos
+          </button>
+          
     </div>
 
     <!-- Elementos de áudio para feedback -->

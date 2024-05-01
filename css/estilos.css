@@ -16,7 +16,7 @@ body {
 }
 
 textarea {
-    font-weight: 500;
+    font-weight: 400;
     font-size: 16px;
 }
 
@@ -101,6 +101,14 @@ span {
     font-weight: bold;
     color: #000;
 }
+
+.click-twice {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 5px; /* Espaçamento entre o texto e o botão */
+    color: #ff0000;
+}
+  
 
 .bold {
     font-weight: bold;
