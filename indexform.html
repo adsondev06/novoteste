@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/estilos.css">
+    <title>Coletor</title>
+</head>
+
+<body>
+    <div id="form-overlay">
+        <div id="form-container">
+            <form id="form" action="https://script.google.com/macros/s/AKfycbzi57W_KrwzojBl4bG8voF9a58rNwaS3VKbzGmkhz9uJHaaIHbbZ_HXece_t7nWHArq/exec" method="post">
+                <h2>Seus Códigos</h2>
+        
+                <label for="acao" class="acao">Ação:</label>
+                <select id="acao" name="acao" required>
+                    <option value="">Selecione uma opção</option>
+                    <option value="Insucesso">Insucesso</option>
+                    <option value="Coletas" selected>Coletas</option>
+                </select>
+        
+                <label for="seunome">Seu Nome:</label>
+                <input type="text" id="seunome" name="seunome" required autocomplete="on">
+        
+                <label for="codigos">Códigos Lidos:</label>
+                <textarea id="codigos" name="codigos" rows="5" required></textarea>
+        
+                <button type="submit">Enviar</button>
+                <!-- Botão para voltar para a página de coleta -->
+                <button type="button" onclick="toggleForm()">Voltar para Coleta</button>
+            </form>
+        </div>
+    </div>
+
+    <p class="alerta">Se não iniciar a leitura, atualize a página!</p>
+    <video id="video" playsinline></video>
+    <input type="number" name="codigo" id="codeInput" placeholder="Não escaneou, digite aqui"/>
+    <div id="barcode-results"></div>
+    <p id="codeCount">Códigos lidos: <span id="count">0</span></p>
+    <div class="button-container">
+        <button id="reloadButton" class="button" onclick="reloadPage()">Atualizar Página</button>
+        <!-- Botão de Enviar Códigos -->
+        <button id="sendCodesButton" class="button" onclick="sendCodes(); toggleForm();">Enviar Códigos</button>
+    </div>
+
+    <audio id="successSound" src="audio/sucesso.mp3"></audio>
+    <audio id="errorSound" src="audio/error-126627.mp3"></audio>
+
+    <script src="https://cdn.jsdelivr.net/npm/quagga/dist/quagga.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        function toggleForm() {
+            var overlay = document.getElementById("form-overlay");
+            overlay.style.display = overlay.style.display === "none" ? "block" : "none";
+        }
+
+        // Função para buscar o valor do localStorage e definir no input "seunome"
+        document.addEventListener('DOMContentLoaded', function() {
+            var nomeInput = document.getElementById('seunome');
+            var nomePadrao = localStorage.getItem('username');
+            if (nomePadrao) {
+                nomeInput.value = nomePadrao;
+            }
+        });
+    </script>
+</body>
+</html>

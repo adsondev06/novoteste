@@ -3,16 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário de Envio</title>
+    <link rel="stylesheet" href="css/login.css">
+    <title>Login</title>
 </head>
 <body>
-    <h2>Enviar</h2>
-    <form id="form" action="https://script.google.com/macros/s/AKfycbzeky_oSca14uRknwyi7JbM1Np7au0CzoezbGxWuN-aGuTIjaG6DqT66odRnigZxk85/exec" method="post">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required><br><br>
-        <label for="codigos">Códigos (separados por linha):</label><br>
-        <textarea id="codigos" name="codigos" rows="4" cols="50" required></textarea><br><br>
-        <button type="submit">Enviar</button>
-    </form>
+    <div class="container">
+        <div class="card">
+            <h2>Seja Bem Vindo</h2>
+            <form id="loginForm">
+                <label for="username"></label>
+                <input type="text" id="username" name="username" placeholder="Digite seu nome" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Função para verificar se o usuário está logado
+        function checkLogin() {
+            const username = localStorage.getItem('username');
+            const expirationDate = localStorage.getItem('expirationDate');
+            if (username && expirationDate) {
+                const currentTime = new Date().getTime();
+                if (currentTime < expirationDate) {
+                    // Se o usuário estiver logado e o tempo de expiração não tiver sido alcançado, redirecionar para o index.html
+                    window.location.href = 'index.html';
+                } else {
+                    // Limpar os dados de login do localStorage se o tempo de expiração tiver sido alcançado
+                    localStorage.removeItem('username');
+                    localStorage.removeItem('expirationDate');
+                }
+            }
+        }
+
+        // Verificar se o usuário já está logado ao carregar a página
+        checkLogin();
+
+        // Evento de envio do formulário de login
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            
+            // Salvar o nome do usuário no localStorage
+            localStorage.setItem('username', username);
+
+            // Definir o tempo de expiração para 5 minutos (em milissegundos)
+            const expirationTime = 7 * 60 * 60 * 1000; // 5 minutos
+            const expirationDate = new Date().getTime() + expirationTime;
+
+            // Salvar o tempo de expiração no localStorage
+            localStorage.setItem('expirationDate', expirationDate);
+
+            // Redirecionar para o index.html
+            window.location.href = 'indexform.html';
+        });
+
+        // Verificar o tempo de expiração periodicamente (a cada segundo)
+        setInterval(checkLogin, 1000);
+    </script>
 </body>
 </html>
