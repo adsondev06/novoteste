@@ -65,12 +65,12 @@ textarea {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    font-weight: 700;
+    border: 1px solid #000;
 }
 
 #reloadButton {
     background-color: red;
-    color: #000;
+    color: #fff;
 }
 
 #codeInput {
@@ -123,7 +123,7 @@ span {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
-    padding: 20px 30px 20px 20px;
+    padding: 20px 50px 20px 40px;
     border-radius: 10px;
     z-index: 10000;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
@@ -138,6 +138,8 @@ span {
 #form-container label {
     display: block;
     margin-bottom: 10px;
+    text-align: center;
+    margin-top: 5px;
 }
 #form-container input[type="text"],
 #form-container select,
@@ -152,7 +154,7 @@ span {
     height: 100px;
     resize: vertical;
 }
-#form-container button {
+#form-container .enviar {
     display: block;
     width: 100%;
     padding: 10px;
@@ -164,9 +166,23 @@ span {
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s;
+    border: 1px solid #000;
 }
-#form-container button:hover {
-    background-color: #0056b3;
+
+.voltar {
+    background-color: red;
+    color: #000;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: 1px solid #000;
 }
 
 @media only screen and (max-width: 600px) {
