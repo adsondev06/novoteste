@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="css/estilos.css">
     <title>Coletor</title>
 </head>
-
 <body>
     <!-- Seção do formulário -->
     <div id="form-overlay">
@@ -15,7 +14,7 @@
                 <!-- Título do formulário -->
                 <h2>Seus Códigos</h2>
         
-                <!-- Dropdown para seleção da ação -->
+                <!-- Select para seleção da ação -->
                 <label for="acao" class="acao">Escolha:</label>
                 <select id="acao" name="acao" required>
                     <option value="">Selecione uma opção</option>
@@ -34,7 +33,7 @@
                 <!-- Botão para enviar o formulário -->
                 <button type="submit" class="enviar">Enviar</button>
                 <!-- Botão de Voltar para Coleta -->
-                <button type="button" onclick="toggleForm(true)" class="voltar">Voltar para Coleta</button>
+                <button type="button" onclick="toggleForm()" class="voltar">Voltar para Coleta</button>
             </form>
         </div>
     </div>
@@ -61,24 +60,8 @@
 
     <!-- Importação da biblioteca QuaggaJS -->
     <script src="https://cdn.jsdelivr.net/npm/quagga/dist/quagga.min.js"></script>
+    
     <!-- Script JavaScript personalizado -->
     <script src="js/script.js"></script>
-    <script>
-        // Função para abrir ou fechar o formulário
-        function toggleForm() {
-            var overlay = document.getElementById("form-overlay");
-            overlay.style.display = overlay.style.display === "none" ? "block" : "none";
-}
-
-
-        // Função para buscar o valor do localStorage e definir no input "seunome"
-        document.addEventListener('DOMContentLoaded', function() {
-            var nomeInput = document.getElementById('seunome');
-            var nomePadrao = localStorage.getItem('username');
-            if (nomePadrao) {
-                nomeInput.value = nomePadrao;
-            }
-        });
-    </script>
 </body>
 </html>
